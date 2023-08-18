@@ -6,14 +6,4 @@ body {
     background-color: #020137;
 }
 
-.option.correct {
-    background-color: #2cce7d !important;
-}
 
-.option.wrong {
-    background-color: #ff5a5f !important;
-}
-
-.clicked{
-    background-color: #2cce7d !important;
-}
