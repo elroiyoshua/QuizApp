@@ -3,15 +3,15 @@ import { ref, computed } from "vue";
 
 const questions = ref([
   {
-    question: "Inside which HTML element do we put the JavaScript?",
+    question: "Is JavaScript case-sensitive?",
     answer: 0,
-    options: ["<script>", "<js>", "<javascript>"],
+    options: ["Yes", "Maybe", "No"],
     selected: null,
   },
   {
-    question: "The external JavaScript file must contain the <script> tag.",
+    question: "How do you declare a JavaScript variable?",
     answer: 1,
-    options: ["True", "False", "I Dont Know"],
+    options: ["variable carName;", "var carName;  ", "v carName;"],
     selected: null,
   },
   {
@@ -97,20 +97,30 @@ const nextQuestion = () => {
       <section class="quiz" v-if="!quizCompleted">
         <!-- pembungkus -->
         <div
-          class="card h-[40%] sm:h-[50%] sm:w-[90%] md:w-[80%] lg:w-[70%] mt-5 mx-auto bg-slate-800 rounded-md drop-shadow-md p-5"
+          class="card h-[40%] sm:h-[50%] sm:w-[90%] md:w-[80%] lg:w-[70%] mt-5 mx-auto bg-slate-800 rounded-md drop-shadow-md p-2"
         >
           <div class="quiz-info flex justify-between m-2">
             <!-- Pertanyaan -->
-            <span class="sm:text-xs md:text-xl lg:text-2xl text-slate-400">{{
-              getCurrentQuestion.question
-            }}</span>
-            <!-- Score -->
-            <span class="sm:text-xs md:text-xl lg:text-2xl text-slate-400">
-              Your Score : {{ score }} / {{ questions.length }}</span
+            <span
+              class="sm:text-[5px] md:text-xl lg:text-2xl xl:text-2xl text-slate-400"
+              >{{ getCurrentQuestion.question }}</span
             >
+            <!-- Score -->
+            <div class="">
+              <span
+                class="sm:text-[4px] md:text-xl lg:text-2xl xl:text-2xl text-green-400"
+              >
+                {{ score }}</span
+              >
+              <span
+                class="sm:text-[4px] md:text-xl lg:text-2xl xl:text-2xl text-slate-400"
+              >
+                / {{ questions.length }}</span
+              >
+            </div>
           </div>
 
-          <div class="options">
+          <div class="options sm:text-[4px] md:text-xl lg:text-2xl xl:text-2xl">
             <!-- disini merupakan perulangan untuk memanggil pilihan pilihan pada setiap pertanyan -->
             <!-- dan disini juga dilakukan pengkondisian menggunakan ternary operator -->
             <!-- disini kita memilih apakah option yang dipilih benar atau tidak -->
