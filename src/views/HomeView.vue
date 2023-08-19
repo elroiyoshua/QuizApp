@@ -88,22 +88,24 @@ const nextQuestion = () => {
 <template>
   <body>
     <main class="app">
-      <h1 class="sm:text-xl md:text-4xl lg:text-5xl text-center font-sans text-slate-400 mt-5">
+      <h1
+        class="sm:text-xl md:text-4xl lg:text-5xl text-center font-sans text-slate-400 mt-5"
+      >
         JavaScript Quiz
       </h1>
 
       <section class="quiz" v-if="!quizCompleted">
         <!-- pembungkus -->
         <div
-          class="card h-[40%] sm:w-[80%] md:w-[70%] lg:w-[60%] mt-5 mx-auto bg-slate-800 rounded-md drop-shadow-md p-5"
+          class="card h-[40%] sm:h-[50%] sm:w-[90%] md:w-[80%] lg:w-[70%] mt-5 mx-auto bg-slate-800 rounded-md drop-shadow-md p-5"
         >
           <div class="quiz-info flex justify-between m-2">
             <!-- Pertanyaan -->
-            <span class="sm:text-xs md:text-xl lg:text-2xl text-2xl text-slate-400">{{
+            <span class="sm:text-xs md:text-xl lg:text-2xl text-slate-400">{{
               getCurrentQuestion.question
             }}</span>
             <!-- Score -->
-            <span class="sm:text-xs md:text-xl lg:text-2xl text-2xl text-slate-400">
+            <span class="sm:text-xs md:text-xl lg:text-2xl text-slate-400">
               Your Score : {{ score }} / {{ questions.length }}</span
             >
           </div>
@@ -116,7 +118,7 @@ const nextQuestion = () => {
             <label
               v-for="(option, index) in getCurrentQuestion.options"
               :key="index"
-              :class="`option${
+              :class="`option ${
                 getCurrentQuestion.selected == index
                   ? index == getCurrentQuestion.answer
                     ? 'correct'
@@ -131,10 +133,16 @@ const nextQuestion = () => {
             >
               <ul>
                 <li
-                  class="cursor-pointer rounded-md border-2 m-2 p-2 hover:opacity-50 bg-blue-950 "
-                  :class="`${
-                    getCurrentQuestion.clicked == index ? 'opacity-50' : ''
-                  }`"
+                  class="cursor-pointer rounded-md border-2 m-2 p-2 hover:opacity-50 bg-blue-950"
+                  :class="{
+                    'bg-green-500':
+                      getCurrentQuestion.selected == index &&
+                      index == getCurrentQuestion.answer,
+                    'bg-red-500':
+                      getCurrentQuestion.selected == index &&
+                      index != getCurrentQuestion.answer,
+                    'bg-blue-950': true,
+                  }"
                 >
                   <input
                     type="radio"
@@ -145,7 +153,9 @@ const nextQuestion = () => {
                     @change="setAnswer"
                     class="hidden focus:opacity-50"
                   />
-                  <span class="sm:text-lg text-2xl text-white">{{ option }}</span>
+                  <span class="sm:text-lg text-2xl text-white">{{
+                    option
+                  }}</span>
                 </li>
               </ul>
             </label>
@@ -153,7 +163,7 @@ const nextQuestion = () => {
           <button
             @click="nextQuestion"
             :disabled="!getCurrentQuestion.selected"
-            class="border-2 m-2 rounded-md w-[20%] h-[30%] bg-green-800 disabled:bg-red-900"
+            class="border-2 m-2 rounded-md w-[20%] h-[30%] bg-green-500 disabled:bg-red-500"
           >
             {{
               getCurrentQuestion.index == questions.length - 1
